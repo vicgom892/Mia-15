@@ -5,25 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <meta name="theme-color" content="#e9d4c8">
 <meta name="description" content="Invitación a mis 15 años - Mía">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>15 Años - Mía</title>
 
-<!-- Open Graph / WhatsApp - OPTIMIZADO -->
-<meta property="og:title" content="Mía · 15 Años | Champagne Edition">
-<meta property="og:description" content="✨ Te invito a celebrar mis 15 años. Sábado 15 de Noviembre, 20:00hs. Salón Champagne Garden.">
+<!-- CACHE BUSTING - Forzar actualización -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<title>✨ Mía · 15 Años | Champagne Edition</title>
+
+<!-- Open Graph / WhatsApp - OPTIMIZADO CON VERSIÓN -->
+<meta property="og:title" content="✨ Mía · 15 Años | Champagne Edition">
+<meta property="og:description" content="Te invito a celebrar mis 15 años. Sábado 15 de Noviembre, 20:00hs. Salón Champagne Garden.">
 <meta property="og:url" content="https://vicgom892.github.io/Mia-15/">
-<meta property="og:image" content="https://vicgom892.github.io/Mia-15/foto.jpg">
+<meta property="og:image" content="https://vicgom892.github.io/Mia-15/foto.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Invitación 15 años Mía - Champagne Edition">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mía 15 Años">
+<meta property="og:locale" content="es_AR">
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Mía · 15 Años">
-<meta name="twitter:description" content="✨ Te invito a celebrar mis 15 años">
-<meta name="twitter:image" content="https://vicgom892.github.io/Mia-15/foto.jpg">
+<meta name="twitter:title" content="✨ Mía · 15 Años">
+<meta name="twitter:description" content="Te invito a celebrar mis 15 años">
+<meta name="twitter:image" content="https://vicgom892.github.io/Mia-15/foto.jpg?v=2">
+<meta name="twitter:image:alt" content="Invitación 15 años Mía">
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -85,7 +92,7 @@ body.tema-lavanda {
 ::-webkit-scrollbar-track { background: var(--primary-light); }
 ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
-/* ===== ANIMACIÓN SOBRE INICIAL ===== */
+/* ===== ANIMACIÓN SOBRE INICIAL (MANTENIDA) ===== */
 .sobre-inicial {
   position: fixed; inset: 0; background: #faf0e9; z-index: 10000;
   display: flex; align-items: center; justify-content: center;
@@ -150,7 +157,7 @@ body.tema-lavanda {
   width: 100%;
   background:
     linear-gradient(rgba(250,240,233,0.6), rgba(245,225,214,0.6)),
-    url('foto.jpg');
+    url('foto.jpg?v=2');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -893,7 +900,7 @@ footer .heart {
   <p class="section-text">Algunos recuerdos que quiero compartir con vos <i class="fas fa-camera-retro"></i></p>
   <div class="gallery-grid">
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="foto.jpg" alt="Foto 1" loading="lazy">
+      <img src="foto.jpg?v=2" alt="Foto 1" loading="lazy">
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
       <img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?w=400&h=400&fit=crop" alt="Foto 2" loading="lazy">
@@ -908,7 +915,7 @@ footer .heart {
       <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop" alt="Foto 5" loading="lazy">
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="foto.jpg" alt="Foto 6" loading="lazy">
+      <img src="foto.jpg?v=2" alt="Foto 6" loading="lazy">
     </div>
   </div>
 </section>
@@ -1030,7 +1037,7 @@ footer .heart {
     <p class="section-text" style="margin-bottom:1.5rem;">
       ¡Me encantaría contar con vos! Confirmame tu presencia antes del 1° de Noviembre <i class="fas fa-heart"></i>
     </p>
-    <a href="https://wa.me/5491123456789?text=Hola%20Mía!%20Confirmo%20mi%20asistencia%20a%20tus%2015%20%20Años🎉✨" target="_blank" class="btn-maps" style="background:linear-gradient(135deg, #25D366, #128C7E);">
+    <a href="https://wa.me/5491123456789?text=Hola%20Mía!%20Confirmo%20mi%20asistencia%20a%20tus%2015%20Años🎉✨" target="_blank" class="btn-maps" style="background:linear-gradient(135deg, #25D366, #128C7E);">
       <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
     </a>
   </div>
