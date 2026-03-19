@@ -3,6 +3,7 @@
 <head>
   <!-- Básicos (primero siempre) -->
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <!-- Título (lo más importante) -->
@@ -1412,12 +1413,12 @@ function closeLightbox(event) {
   }
 }
 
-// ===== COMPARTIR POR WHATSAPP - VERSIÓN DEFINITIVA =====
+// ===== COMPARTIR POR WHATSAPP - VERSIÓN FINAL FUNCIONAL =====
 function compartirWhatsApp() {
-  // Usamos la URL pública de GitHub
+  // URL pública de la invitación
   const urlCompartir = 'https://vicgom892.github.io/Mia-15/';
   
-  // Mensaje con emojis en formato unicode (seguro para WhatsApp)
+  // Mensaje exacto con los emojis que ya funcionaron
   const mensaje = 
     "✨ INVITACIÓN 15 AÑOS - MÍA ✨\n\n" +
     "¡Estás invitad@ a mi fiesta!\n\n" +
@@ -1429,10 +1430,10 @@ function compartirWhatsApp() {
     urlCompartir + "\n\n" +
     "¡Te espero para celebrar juntos! 🎉💕";
 
-  // Codificación especial para WhatsApp Web
-  const encodedMensaje = encodeURIComponent(mensaje).replace(/\*/g, '%2A');
+  // Codificación estándar que WhatsApp interpreta correctamente
+  const encodedMensaje = encodeURIComponent(mensaje);
   
-  // Abrir WhatsApp Web directamente
+  // Abrir WhatsApp Web
   window.open(`https://web.whatsapp.com/send?text=${encodedMensaje}`, '_blank');
   
   showToast('📤 Abriendo WhatsApp Web...', 'success');
