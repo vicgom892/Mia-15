@@ -1412,11 +1412,12 @@ function closeLightbox(event) {
   }
 }
 
-// ===== COMPARTIR POR WHATSAPP CORREGIDO (con emojis) =====
+// ===== COMPARTIR POR WHATSAPP - VERSIÓN DEFINITIVA =====
 function compartirWhatsApp() {
-  const urlLimpia = window.location.origin + window.location.pathname;
+  // Usamos la URL pública de GitHub
+  const urlCompartir = 'https://vicgom892.github.io/Mia-15/';
   
-  // Usamos caracteres unicode directamente en lugar de emojis en el código
+  // Mensaje con emojis en formato unicode (seguro para WhatsApp)
   const mensaje = 
     "✨ INVITACIÓN 15 AÑOS - MÍA ✨\n\n" +
     "¡Estás invitad@ a mi fiesta!\n\n" +
@@ -1425,16 +1426,16 @@ function compartirWhatsApp() {
     "📍 Salón Champagne Garden\n" +
     "   Av. del Libertador 2840, Buenos Aires\n\n" +
     "💫 Mirá la invitación completa acá:\n" +
-    urlLimpia + "\n\n" +
+    urlCompartir + "\n\n" +
     "¡Te espero para celebrar juntos! 🎉💕";
 
-  // Codificamos correctamente para WhatsApp
-  const encodedMensaje = encodeURIComponent(mensaje);
+  // Codificación especial para WhatsApp Web
+  const encodedMensaje = encodeURIComponent(mensaje).replace(/\*/g, '%2A');
   
-  // Usamos WhatsApp Web (funciona en móvil y desktop)
-  window.open(`https://wa.me/?text=${encodedMensaje}`, '_blank');
+  // Abrir WhatsApp Web directamente
+  window.open(`https://web.whatsapp.com/send?text=${encodedMensaje}`, '_blank');
   
-  showToast('📤 Abriendo WhatsApp...', 'success');
+  showToast('📤 Abriendo WhatsApp Web...', 'success');
 }
 
 // ===== COMPARTIR EN INSTAGRAM =====
