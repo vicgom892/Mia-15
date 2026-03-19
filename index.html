@@ -1194,20 +1194,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Forzar refresco de la preview en WhatsApp (solo para la dueña)
-if (esDuena) {
-  console.log('🔄 Forzando refresco de metadatos para WhatsApp...');
-  // Agregamos un parámetro random a la imagen para evitar caché (solo en el head)
-  const metaImage = document.querySelector('meta[property="og:image"]');
-  if (metaImage) {
-    const originalContent = metaImage.content;
-    // Esto no afecta la imagen real, solo hace que WhatsApp re-scrapee
-    metaImage.content = originalContent + '?v=' + new Date().getTime();
+  if (esDuena) {
+    console.log('🔄 Forzando refresco de metadatos para WhatsApp...');
+    const metaImage = document.querySelector('meta[property="og:image"]');
+    if (metaImage) {
+      const originalContent = metaImage.content;
+      metaImage.content = originalContent + '?v=' + new Date().getTime();
+    }
   }
-}
 });
 
-// ===== MÚSICA (corregido y seguro) =====
-const musicBtn = document.getElementById('musicToggle');  // ← ¡ESTA LÍNEA FALTABA!
+// ===== MÚSICA =====
+const musicBtn = document.getElementById('musicToggle');
 
 function initMusic() {
   if (!audio || !musicBtn || !musicIcon) {
@@ -1217,7 +1215,6 @@ function initMusic() {
 
   audio.volume = 0.3;
 
-  // Intentamos autoplay
   const playPromise = audio.play();
   if (playPromise !== undefined) {
     playPromise.then(() => {
@@ -1264,7 +1261,7 @@ document.body.addEventListener('touchstart', () => {
   }
 }, { once: true });
 
-// ==== COUNTDOWN =====
+// ===== COUNTDOWN =====
 function initCountdown() {
   updateCountdown();
   setInterval(updateCountdown, 1000);
@@ -1415,24 +1412,23 @@ function closeLightbox(event) {
   }
 }
 
-// ===== COMPARTIR POR WHATSAPP (MEJORADO) =====
+// ===== COMPARTIR POR WHATSAPP CORREGIDO (con emojis) =====
 function compartirWhatsApp() {
-  // URL limpia, sin parámetros secretos
   const urlLimpia = window.location.origin + window.location.pathname;
   
-  // Mensaje con formato mejorado para WhatsApp
+  // Usamos caracteres unicode directamente en lugar de emojis en el código
   const mensaje = 
-    "✨ *INVITACIÓN 15 AÑOS - MÍA* ✨\n\n" +
+    "✨ INVITACIÓN 15 AÑOS - MÍA ✨\n\n" +
     "¡Estás invitad@ a mi fiesta!\n\n" +
-    "📅 *Sábado 15 de Noviembre 2025*\n" +
-    "⏰ *20:00 horas*\n" +
-    "📍 *Salón Champagne Garden*\n" +
+    "📅 Sábado 15 de Noviembre 2025\n" +
+    "⏰ 20:00 horas\n" +
+    "📍 Salón Champagne Garden\n" +
     "   Av. del Libertador 2840, Buenos Aires\n\n" +
     "💫 Mirá la invitación completa acá:\n" +
     urlLimpia + "\n\n" +
     "¡Te espero para celebrar juntos! 🎉💕";
 
-  // Codificación correcta para WhatsApp Web
+  // Codificamos correctamente para WhatsApp
   const encodedMensaje = encodeURIComponent(mensaje);
   
   // Usamos WhatsApp Web (funciona en móvil y desktop)
@@ -1441,27 +1437,22 @@ function compartirWhatsApp() {
   showToast('📤 Abriendo WhatsApp...', 'success');
 }
 
-// ===== COMPARTIR EN INSTAGRAM (MEJORADO) =====
+// ===== COMPARTIR EN INSTAGRAM =====
 function compartirInstagram() {
   const urlLimpia = window.location.origin + window.location.pathname;
   
-  // Copiamos al portapapeles automáticamente
   navigator.clipboard.writeText(urlLimpia).then(() => {
-    // Mostramos instrucciones claras
     showToast('✅ Link copiado!', 'success');
     
-    // Abrimos Instagram con instrucciones (si está en móvil)
     setTimeout(() => {
       if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        // En móvil, ofrecemos abrir Instagram
         if (confirm('¿Querés abrir Instagram ahora para pegar el link en tu Story?')) {
-          window.open('instagram://', '_blank'); // Intenta abrir app
+          window.open('instagram://', '_blank');
           setTimeout(() => {
-            window.open('https://www.instagram.com', '_blank'); // Fallback a web
+            window.open('https://www.instagram.com', '_blank');
           }, 500);
         }
       } else {
-        // En desktop
         alert('📱 Link copiado! Pegalo en tu Story de Instagram desde el celular');
       }
     }, 300);
@@ -1470,14 +1461,13 @@ function compartirInstagram() {
   });
 }
 
-// ===== COPIAR LINK (MEJORADO) =====
+// ===== COPIAR LINK =====
 function copiarLink() {
   const urlLimpia = window.location.origin + window.location.pathname;
   
   navigator.clipboard.writeText(urlLimpia).then(() => {
     showToast('✅ Link copiado al portapapeles', 'success');
     
-    // Feedback adicional
     const btn = event.currentTarget;
     const originalText = btn.innerHTML;
     btn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
@@ -1487,6 +1477,191 @@ function copiarLink() {
   }).catch(() => {
     showToast('❌ Error al copiar', 'error');
   });
+}
+
+// ===== NUEVA FUNCIÓN: GENERAR IMAGEN CON FOTO.JPG =====
+function generarImagenCompartir() {
+  showToast('🎨 Generando imagen con tu foto...', 'success');
+  
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080;
+  canvas.height = 1080;
+  const ctx = canvas.getContext('2d');
+  
+  // Cargar foto.jpg como fondo
+  const fondo = new Image();
+  fondo.crossOrigin = 'Anonymous';
+  // Agregamos timestamp para evitar caché
+  fondo.src = 'foto.jpg?v=' + Date.now();
+  
+  fondo.onload = function() {
+    // Dibujar la foto de fondo ocupando todo el canvas
+    ctx.drawImage(fondo, 0, 0, canvas.width, canvas.height);
+    
+    // Capa semitransparente elegante para mejorar legibilidad
+    const gradiente = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradiente.addColorStop(0, 'rgba(250, 240, 233, 0.7)');
+    gradiente.addColorStop(0.5, 'rgba(245, 225, 214, 0.6)');
+    gradiente.addColorStop(1, 'rgba(250, 240, 233, 0.7)');
+    ctx.fillStyle = gradiente;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Configurar sombras para texto
+    ctx.shadowColor = 'rgba(0,0,0,0.3)';
+    ctx.shadowBlur = 15;
+    ctx.shadowOffsetX = 3;
+    ctx.shadowOffsetY = 3;
+    
+    // Título principal
+    ctx.font = 'bold 90px "Playfair Display", serif';
+    ctx.fillStyle = '#4a3a35';
+    ctx.textAlign = 'center';
+    ctx.fillText('✨ MÍA ✨', canvas.width/2, 200);
+    
+    // Subtítulo
+    ctx.font = 'bold 70px "Playfair Display", serif';
+    ctx.fillStyle = '#c9a88b';
+    ctx.fillText('15 AÑOS', canvas.width/2, 300);
+    
+    // Línea decorativa
+    ctx.shadowBlur = 5;
+    ctx.strokeStyle = '#d4af37';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(300, 350);
+    ctx.lineTo(780, 350);
+    ctx.stroke();
+    
+    // Detalles de la fiesta
+    ctx.font = 'bold 45px "Montserrat", sans-serif';
+    ctx.fillStyle = '#7f5e52';
+    ctx.shadowBlur = 10;
+    
+    ctx.fillText('📅 SÁBADO 15 NOV 2025', canvas.width/2, 500);
+    ctx.fillText('⏰ 20:00 HORAS', canvas.width/2, 580);
+    ctx.fillText('📍 SALÓN CHAMPAGNE GARDEN', canvas.width/2, 660);
+    
+    // Código QR con el link
+    const urlLimpia = window.location.origin + window.location.pathname;
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(urlLimpia)}`;
+    
+    const qrImg = new Image();
+    qrImg.crossOrigin = 'Anonymous';
+    qrImg.src = qrUrl;
+    
+    qrImg.onload = function() {
+      // Marco blanco para el QR
+      ctx.shadowBlur = 20;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(395, 720, 290, 290);
+      
+      // Dibujar QR
+      ctx.drawImage(qrImg, 400, 725, 280, 280);
+      
+      // Texto instructivo
+      ctx.shadowBlur = 8;
+      ctx.font = '30px "Montserrat", sans-serif';
+      ctx.fillStyle = '#4a3a35';
+      ctx.fillText('📱 Escaneá para ver invitación', canvas.width/2, 1050);
+      
+      // Descargar imagen
+      const link = document.createElement('a');
+      link.download = 'invitacion-mia-15.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      
+      showToast('✅ Imagen guardada en tu dispositivo', 'success');
+      
+      // Preguntar si quiere compartir por WhatsApp
+      setTimeout(() => {
+        if (confirm('📤 ¿Querés compartir esta imagen por WhatsApp ahora?')) {
+          if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            showToast('📱 Abrí WhatsApp y adjuntá la imagen guardada', 'success');
+            window.open('https://wa.me/', '_blank');
+          } else {
+            alert('✅ Imagen guardada. Compartila por WhatsApp desde tu celular');
+          }
+        }
+      }, 500);
+    };
+    
+    qrImg.onerror = function() {
+      showToast('❌ Error generando QR, copiando link...', 'error');
+      copiarLinkSimple();
+    };
+  };
+  
+  fondo.onerror = function() {
+    showToast('❌ Error cargando foto.jpg. Usando fondo elegante...', 'error');
+    generarImagenSinFoto(); // Función de respaldo
+  };
+}
+
+// ===== FUNCIÓN DE RESPALDO SIN FOTO =====
+function generarImagenSinFoto() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080;
+  canvas.height = 1080;
+  const ctx = canvas.getContext('2d');
+  
+  // Fondo elegante champagne
+  const gradiente = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  gradiente.addColorStop(0, '#fcf3ed');
+  gradiente.addColorStop(0.5, '#f5e1d6');
+  gradiente.addColorStop(1, '#e9d4c8');
+  ctx.fillStyle = gradiente;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.shadowColor = 'rgba(0,0,0,0.2)';
+  ctx.shadowBlur = 15;
+  ctx.shadowOffsetX = 3;
+  ctx.shadowOffsetY = 3;
+  
+  // Título
+  ctx.font = 'bold 100px "Playfair Display", serif';
+  ctx.fillStyle = '#4a3a35';
+  ctx.textAlign = 'center';
+  ctx.fillText('✨ MÍA ✨', canvas.width/2, 250);
+  
+  ctx.font = 'bold 80px "Playfair Display", serif';
+  ctx.fillStyle = '#c9a88b';
+  ctx.fillText('15 AÑOS', canvas.width/2, 380);
+  
+  ctx.font = 'bold 45px "Montserrat", sans-serif';
+  ctx.fillStyle = '#7f5e52';
+  ctx.fillText('📅 SÁBADO 15 NOV 2025', canvas.width/2, 550);
+  ctx.fillText('⏰ 20:00 HS', canvas.width/2, 630);
+  ctx.fillText('📍 SALÓN CHAMPAGNE GARDEN', canvas.width/2, 710);
+  
+  const urlLimpia = window.location.origin + window.location.pathname;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(urlLimpia)}`;
+  
+  const qrImg = new Image();
+  qrImg.crossOrigin = 'Anonymous';
+  qrImg.src = qrUrl;
+  
+  qrImg.onload = function() {
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(395, 770, 290, 290);
+    ctx.drawImage(qrImg, 400, 775, 280, 280);
+    
+    ctx.font = '30px "Montserrat", sans-serif';
+    ctx.fillStyle = '#4a3a35';
+    ctx.fillText('📱 Escaneá para ver invitación', canvas.width/2, 1080);
+    
+    const link = document.createElement('a');
+    link.download = 'invitacion-mia-15.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('✅ Imagen guardada', 'success');
+  };
+}
+
+// ===== FUNCIÓN AUXILIAR COPIAR LINK =====
+function copiarLinkSimple() {
+  const urlLimpia = window.location.origin + window.location.pathname;
+  navigator.clipboard.writeText(urlLimpia);
+  showToast('🔗 Link copiado', 'success');
 }
 
 // ===== KEYBOARD SUPPORT =====
@@ -1505,8 +1680,6 @@ window.addEventListener('scroll', () => {
     hero.style.backgroundPositionY = `${scrolled * 0.25}px`;
   }
 });
-
-
 
 console.log('✨ Invitación actualizada - Modo Dueña: ' + (document.getElementById('seccion-owner').style.display === 'block' ? 'ACTIVADO' : 'oculto'));
 </script>
