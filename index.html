@@ -847,7 +847,7 @@ footer .heart {
   <div class="card-elegant event-details">
     <div class="event-detail-item">
       <i class="fas fa-calendar-alt"></i>
-      <span>Sábado 15 de Noviembre, 2025</span>
+      <span>Sábado 15 de Noviembre, 2026</span>
     </div>
     <div class="event-detail-item">
       <i class="fas fa-clock"></i>
@@ -1085,7 +1085,7 @@ footer .heart {
 <!-- Footer -->
 <footer>
   <p style="font-size:3rem; font-family:'Playfair Display'; font-weight:700; color:var(--primary-dark);">MÍA</p>
-  <p style="margin:20px 0; letter-spacing: 5px; color:var(--text-light);">15 · 11 · 2025</p>
+  <p style="margin:20px 0; letter-spacing: 5px; color:var(--text-light);">15 · 11 · 2026</p>
   <p>Hecho con <span class="heart"><i class="fas fa-heart"></i></span> especialmente para vos</p>
   <p style="margin-top:0.8rem; opacity:0.8;"><small><i class="fas fa-star"></i> Te esperamos para celebrar juntos <i class="fas fa-star"></i></small></p>
 </footer>
@@ -1175,7 +1175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mostrar sección solo para la dueña
   const urlParams = new URLSearchParams(window.location.search);
-  const esDuena = urlParams.get('owner') === 'mia2025';
+  const esDuena = urlParams.get('owner') === 'mia2026';
   if (esDuena) {
     document.getElementById('seccion-owner').style.display = 'block';
   }
@@ -1392,7 +1392,7 @@ function closeLightbox(event) {
 
 // Funciones de compartir (mantenerlas)
 function compartirWhatsApp() {
-  const mensaje = "✨ ¡Estás invitad@ a mis 15 años! ✨\nMía te invita a celebrar\n📅 15/11/2025 - 20:00hs\n📍 Salón Champagne Garden\nMirá la invitación: " + window.location.href;
+  const mensaje = "✨ ¡Estás invitad@ a mis 15 años! ✨\nMía te invita a celebrar\n📅 15/11/2026 - 20:00hs\n📍 Salón Champagne Garden\nMirá la invitación: " + window.location.href;
   window.open(`https://wa.me/?text=${encodeURIComponent(mensaje)}`, '_blank');
   showToast('📤 Abriendo WhatsApp...', 'success');
 }
