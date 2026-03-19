@@ -23,8 +23,8 @@
   <meta property="og:title" content="✨ Mía · 15 Años | Champagne Edition" />
   <meta property="og:description" content="Te invito a celebrar mis 15 años. Sábado 15 de Noviembre 2025, 20:00 hs en Salón Champagne Garden, Buenos Aires. ¡Vení a compartir esta noche mágica! 💕✨" />
   <meta property="og:url" content="https://vicgom892.github.io/Mia-15/" />
-  <meta property="og:image" content="https://i.imgur.com/NVxgOcZ.jpeg" />
-  <meta property="og:image:secure_url" content="https://i.imgur.com/NVxgOcZ.jpeg" />
+  <meta property="og:image" content="https://vicgom892.github.io/Mia-15/invitacion-preview.jpg" />
+<meta property="og:image:secure_url" content="https://vicgom892.github.io/Mia-15/invitacion-preview.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/jpeg" />
@@ -32,13 +32,12 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Mía 15 Años" />
   <meta property="og:locale" content="es_AR" />
-  <meta property="fb:app_id" content="123456789012345" />
 
   <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="✨ Mía · 15 Años | Champagne Edition" />
   <meta name="twitter:description" content="Te invito a celebrar mis 15 años. Sábado 15 de Noviembre 2025, 20:00 hs en Salón Champagne Garden." />
-  <meta name="twitter:image" content="https://i.imgur.com/NVxgOcZ.jpeg" />
+  <meta name="twitter:image" content="https://vicgom892.github.io/Mia-15/invitacion-preview.jpg" />
 
   <!-- PWA / Mobile Web App (moderno y recomendado) -->
   <meta name="mobile-web-app-capable" content="yes" />
@@ -58,7 +57,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Opcional: si algún día creás una app en Facebook Developers, descomentá y poné tu ID -->
-  <!-- <meta property="fb:app_id" content="TU_APP_ID_AQUI" /> -->
+  <meta property="fb:app_id" content="123456789012345" />
 
 <style>
 /* ===== RESET & BASE ===== */
@@ -1495,7 +1494,7 @@ function generarImagenCompartir() {
   const fondo = new Image();
   fondo.crossOrigin = 'Anonymous';
   // Agregamos timestamp para evitar caché
-  fondo.src = 'foto.jpg?v=' + Date.now();
+  fondo.src = 'invitacion-preview.jpg?v=' + Date.now();
   
   fondo.onload = function() {
     // Dibujar la foto de fondo ocupando todo el canvas
