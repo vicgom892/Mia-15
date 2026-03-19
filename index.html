@@ -1065,7 +1065,7 @@ footer .heart {
     ¡Escribime por WhatsApp y la armamos juntos en poquitos días! ✨
   </p>
   
-  <a href="https://wa.me/54911TU-NUMERO-AQUI?text=Hola!%20Vi%20la%20invitación%20de%20Mía%20y%20me%20encantó.%20Quiero%20una%20parecida%20para%20mi%20evento%20💕" 
+  <a href="https://wa.me/5491157194796?text=Hola!%20Vi%20la%20invitación%20de%20Mía%20y%20me%20encantó.%20Quiero%20una%20parecida%20para%20mi%20evento%20💕" 
      target="_blank" class="btn-maps" style="background: linear-gradient(135deg, #25D366, #128C7E); font-size: 1.15rem; padding: 18px 50px;">
     <i class="fab fa-whatsapp fa-lg"></i> ¡Quiero mi invitación!
   </a>
@@ -1192,6 +1192,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (esDuena) {
     document.getElementById('seccion-owner').style.display = 'block';
   }
+
+  // Forzar refresco de la preview en WhatsApp (solo para la dueña)
+if (esDuena) {
+  console.log('🔄 Forzando refresco de metadatos para WhatsApp...');
+  // Agregamos un parámetro random a la imagen para evitar caché (solo en el head)
+  const metaImage = document.querySelector('meta[property="og:image"]');
+  if (metaImage) {
+    const originalContent = metaImage.content;
+    // Esto no afecta la imagen real, solo hace que WhatsApp re-scrapee
+    metaImage.content = originalContent + '?v=' + new Date().getTime();
+  }
+}
 });
 
 // ===== MÚSICA (corregido y seguro) =====
@@ -1403,40 +1415,77 @@ function closeLightbox(event) {
   }
 }
 
-// ===== COMPARTIR POR WHATSAPP (corregido: emojis + URL limpia) =====
+// ===== COMPARTIR POR WHATSAPP (MEJORADO) =====
 function compartirWhatsApp() {
   // URL limpia, sin parámetros secretos
   const urlLimpia = window.location.origin + window.location.pathname;
-
+  
+  // Mensaje con formato mejorado para WhatsApp
   const mensaje = 
-    "✨ ¡Estás invitad@ a mis 15 años! ✨\n" +
-    "Mía te invita a celebrar\n" +
-    "📅 15/11/2025 - 20:00 hs\n" +
-    "📍 Salón Champagne Garden\n" +
-    "Mirá la invitación completa: " + urlLimpia + "\n\n" +
-    "¡Te espero! 💕🎉";
+    "✨ *INVITACIÓN 15 AÑOS - MÍA* ✨\n\n" +
+    "¡Estás invitad@ a mi fiesta!\n\n" +
+    "📅 *Sábado 15 de Noviembre 2025*\n" +
+    "⏰ *20:00 horas*\n" +
+    "📍 *Salón Champagne Garden*\n" +
+    "   Av. del Libertador 2840, Buenos Aires\n\n" +
+    "💫 Mirá la invitación completa acá:\n" +
+    urlLimpia + "\n\n" +
+    "¡Te espero para celebrar juntos! 🎉💕";
 
-  // Codificación correcta para emojis y saltos de línea
+  // Codificación correcta para WhatsApp Web
   const encodedMensaje = encodeURIComponent(mensaje);
-
+  
+  // Usamos WhatsApp Web (funciona en móvil y desktop)
   window.open(`https://wa.me/?text=${encodedMensaje}`, '_blank');
+  
   showToast('📤 Abriendo WhatsApp...', 'success');
 }
 
-// ===== COMPARTIR EN INSTAGRAM (ya copiaba la URL limpia, está ok) =====
+// ===== COMPARTIR EN INSTAGRAM (MEJORADO) =====
 function compartirInstagram() {
-  // Siempre copiamos la URL limpia
   const urlLimpia = window.location.origin + window.location.pathname;
+  
+  // Copiamos al portapapeles automáticamente
   navigator.clipboard.writeText(urlLimpia).then(() => {
-    showToast('🔗 Link copiado! Pegalo en tu Story de Instagram', 'success');
+    // Mostramos instrucciones claras
+    showToast('✅ Link copiado!', 'success');
+    
+    // Abrimos Instagram con instrucciones (si está en móvil)
+    setTimeout(() => {
+      if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        // En móvil, ofrecemos abrir Instagram
+        if (confirm('¿Querés abrir Instagram ahora para pegar el link en tu Story?')) {
+          window.open('instagram://', '_blank'); // Intenta abrir app
+          setTimeout(() => {
+            window.open('https://www.instagram.com', '_blank'); // Fallback a web
+          }, 500);
+        }
+      } else {
+        // En desktop
+        alert('📱 Link copiado! Pegalo en tu Story de Instagram desde el celular');
+      }
+    }, 300);
+  }).catch(() => {
+    showToast('❌ No se pudo copiar', 'error');
   });
 }
 
-// ===== COPIAR LINK (también limpio) =====
+// ===== COPIAR LINK (MEJORADO) =====
 function copiarLink() {
   const urlLimpia = window.location.origin + window.location.pathname;
+  
   navigator.clipboard.writeText(urlLimpia).then(() => {
-    showToast('🔗 Link copiado al portapapeles', 'success');
+    showToast('✅ Link copiado al portapapeles', 'success');
+    
+    // Feedback adicional
+    const btn = event.currentTarget;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+    }, 2000);
+  }).catch(() => {
+    showToast('❌ Error al copiar', 'error');
   });
 }
 
@@ -1456,6 +1505,8 @@ window.addEventListener('scroll', () => {
     hero.style.backgroundPositionY = `${scrolled * 0.25}px`;
   }
 });
+
+
 
 console.log('✨ Invitación actualizada - Modo Dueña: ' + (document.getElementById('seccion-owner').style.display === 'block' ? 'ACTIVADO' : 'oculto'));
 </script>
