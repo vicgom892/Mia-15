@@ -12,15 +12,15 @@
 <!-- Título -->
 <title>✨ Mía · 15 Años | Champagne Edition</title>
 
-<!-- Open Graph / Facebook / WhatsApp - Mejorado -->
+<!-- Open Graph / Facebook / WhatsApp - Datos mejorados para vista previa -->
 <meta property="og:title" content="✨ Mía · 15 Años | Champagne Edition">
 <meta property="og:description" content="Te invito a celebrar mis 15 años. Sábado 15 de Noviembre, 20:00hs. Salón Champagne Garden. ¡Te espero! ✨">
 <meta property="og:url" content="https://vicgom892.github.io/Mia-15/">
-<meta property="og:image" content="https://i.imgur.com/TuImagenDePreviewAqui.jpg"> <!-- ¡CAMBIAR POR TU IMAGEN REAL! -->
+<meta property="og:image" content="https://vicgom892.github.io/Mia-15/invitacion-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:alt" content="Invitación 15 años Mía - Champagne Edition">
+<meta property="og:image:alt" content="Invitación 15 años Mía - Fecha: 15 Noviembre 20hs">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Mía 15 Años">
 <meta property="og:locale" content="es_AR">
@@ -29,7 +29,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="✨ Mía · 15 Años | Champagne Edition">
 <meta name="twitter:description" content="Te invito a celebrar mis 15 años. Sábado 15 de Noviembre, 20:00hs.">
-<meta name="twitter:image" content="https://i.imgur.com/TuImagenDePreviewAqui.jpg"> <!-- ¡CAMBIAR TAMBIÉN! -->
+<meta name="twitter:image" content="https://vicgom892.github.io/Mia-15/invitacion-preview.jpg">
+<meta name="twitter:image:alt" content="Invitación 15 años Mía">
+
+<!-- WhatsApp específico (refuerzo) -->
+<meta property="wa:image" content="https://vicgom892.github.io/Mia-15/invitacion-preview.jpg">
+<meta property="wa:title" content="✨ Mía · 15 Años">
+<meta property="wa:description" content="Sábado 15 Noviembre · 20:00hs · Salón Champagne Garden">
 
 <!-- iOS y otros -->
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -37,11 +43,11 @@
 <meta name="apple-mobile-web-app-title" content="Mía 15 Años">
 <link rel="apple-touch-icon" href="https://vicgom892.github.io/Mia-15/foto.jpg">
 
-<!-- Favicon -->
+<!-- Favicon básico -->
 <link rel="icon" type="image/jpg" href="https://vicgom892.github.io/Mia-15/foto.jpg">
 <link rel="shortcut icon" href="https://vicgom892.github.io/Mia-15/foto.jpg">
 
-<!-- Fonts -->
+<!-- Fonts (tus mismas) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -70,7 +76,9 @@ h1, h2, h3, .section-title, .hero-name { font-family: 'Playfair Display', serif;
   --text: #4a3a35; --text-light: #7f5e52; --white: #fff;
   --shadow: 0 8px 32px rgba(201, 168, 139, 0.15);
   --shadow-hover: 0 16px 48px rgba(201, 168, 139, 0.25);
+  --shadow-gold: 0 8px 32px rgba(212, 175, 55, 0.3);
   --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-smooth: all 0.3s ease;
   --radius: 24px; --radius-lg: 32px;
 }
 
@@ -78,14 +86,18 @@ h1, h2, h3, .section-title, .hero-name { font-family: 'Playfair Display', serif;
 body.tema-rosa {
   --primary: #f5d6d0; --primary-dark: #e2b5a8; --primary-light: #fce8e3;
   --bg-gradient: linear-gradient(135deg, #fff5f3 0%, #fce8e3 50%, #fdf7f2 100%);
+  --shadow: 0 8px 32px rgba(226, 181, 168, 0.2);
 }
 body.tema-dorado {
   --primary: #f0dbb0; --primary-dark: #e2c38b; --primary-light: #f9f0d9;
+  --gold: #d4af37; --gold-light: #f4e7a8;
   --bg-gradient: linear-gradient(135deg, #fffcf5 0%, #f9f0d9 50%, #fff9eb 100%);
+  --shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
 }
 body.tema-lavanda {
   --primary: #d4c8e9; --primary-dark: #b8a8d4; --primary-light: #e8e3f5;
   --bg-gradient: linear-gradient(135deg, #f9f7fb 0%, #e8e3f5 50%, #f0ecf9 100%);
+  --shadow: 0 8px 32px rgba(184, 168, 212, 0.2);
 }
 
 /* Scrollbar elegante */
@@ -1044,41 +1056,20 @@ footer .heart {
   </div>
 </section>
 
-<!-- NUEVA SECCIÓN PARA INVITADOS (todos la ven) -->
-<section class="share-section fade-in-up" style="margin: 4rem 0; text-align: center; padding: 2rem; background: var(--secondary); border-radius: var(--radius-lg); box-shadow: var(--shadow);">
-  <h2 class="section-title" style="margin-bottom: 1.2rem;">¿Te gustó la invitación? 💫</h2>
-  <p class="section-text" style="max-width: 480px; margin: 0 auto 2rem; font-size: 1.1rem;">
-    Si te encantó el diseño y querés una igual (o mejor) para tu fiesta de 15, casamiento, bautismo o lo que quieras...<br>
-    ¡Escribime por WhatsApp y la armamos juntos en poquitos días! ✨
-  </p>
-  
-  <a href="https://wa.me/54911TU-NUMERO-AQUI?text=Hola!%20Vi%20la%20invitación%20de%20Mía%20y%20me%20encantó.%20Quiero%20una%20parecida%20para%20mi%20evento%20💕" 
-     target="_blank" class="btn-maps" style="background: linear-gradient(135deg, #25D366, #128C7E); font-size: 1.15rem; padding: 18px 50px;">
-    <i class="fab fa-whatsapp fa-lg"></i> ¡Quiero mi invitación!
-  </a>
-
-  <p style="margin-top: 2rem; font-size: 0.95rem; color: var(--text-light);">
-    Respondo rápido y te paso ejemplos + precios 😊
-  </p>
-</section>
-
-<!-- SECCIÓN OCULTA SOLO PARA LA CUMPLEAÑERA -->
-<section id="seccion-owner" style="display: none; margin: 4rem 0; text-align: center;">
-  <div class="card-elegant" style="background: linear-gradient(135deg, var(--gold-light), var(--primary-light));">
-    <h2 class="section-title" style="color: var(--primary-dark);">🔐 Modo Dueña</h2>
-    <p style="margin: 1rem 0 2rem; color: var(--primary-dark);">Solo vos ves estos botones 😉</p>
-    
-    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-      <button class="btn-share" onclick="compartirWhatsApp()" style="background:#25D366; color:white;">
-        <i class="fab fa-whatsapp"></i> Compartir por WhatsApp
-      </button>
-      <button class="btn-share" onclick="compartirInstagram()" style="background: linear-gradient(#f09433, #bc1888); color:white;">
-        <i class="fab fa-instagram"></i> Compartir en IG
-      </button>
-      <button class="btn-share" onclick="copiarLink()" style="background:#667eea; color:white;">
-        <i class="fas fa-link"></i> Copiar Link
-      </button>
-    </div>
+<!-- Share Section -->
+<section class="share-section fade-in-up">
+  <h2 class="section-title">Compartir Invitación <i class="fas fa-share-alt"></i></h2>
+  <p class="section-text">¿Te gustó la invitación? ¡Compartila con tus amigos!</p>
+  <div class="share-buttons">
+    <button class="btn-share btn-whatsapp-share" onclick="compartirWhatsApp()">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </button>
+    <button class="btn-share btn-instagram-share" onclick="compartirInstagram()">
+      <i class="fab fa-instagram"></i> Instagram
+    </button>
+    <button class="btn-share btn-copy-link" onclick="copiarLink()">
+      <i class="fas fa-link"></i> Copiar Link
+    </button>
   </div>
 </section>
 
@@ -1096,7 +1087,7 @@ footer .heart {
     <span><i class="fas fa-play" id="musicIcon"></i></span>
   </button>
   <audio id="bgMusic" loop preload="auto">
-    <source src="musica.mp3" type="audio/mp3">
+    <source src="mucica.mp3" type="audio/mp3">
   </audio>
 </div>
 <div class="music-info" id="musicInfo">
@@ -1114,7 +1105,7 @@ footer .heart {
 <!-- Modal Gift -->
 <div class="modal-gift" id="giftModal" onclick="closeGiftModal(event)">
   <div class="modal-gift-content" onclick="event.stopPropagation()">
-    <button class="modal-gift-close" onclick="closeGiftModal()">×</button>
+    <button class="modal-gift-close" onclick="closeGiftModal()">&times;</button>
     <h3 class="modal-gift-title"><i class="fas fa-sparkles"></i> Detalle Especial <i class="fas fa-sparkles"></i></h3>
     <p class="modal-gift-text">
       Tu presencia es mi mayor regalo <i class="fas fa-ribbon"></i><br>
@@ -1148,7 +1139,7 @@ footer .heart {
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <button class="lightbox-close" onclick="closeLightbox(event)">×</button>
+  <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
   <img src="" alt="Vista ampliada" id="lightboxImg">
 </div>
 
@@ -1162,6 +1153,7 @@ let isMusicPlaying = false;
 const audio = document.getElementById('bgMusic');
 const musicIcon = document.getElementById('musicIcon');
 const musicInfo = document.getElementById('musicInfo');
+const musicBtn = document.getElementById('musicToggle');
 
 // ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', () => {
@@ -1169,61 +1161,43 @@ document.addEventListener('DOMContentLoaded', () => {
   initProgressBar();
   initScrollAnimations();
   initSparkles();
+  // initPetalRain() - ELIMINADO (pétalos removidos)
   loadSavedTheme();
   initMusic();
   setTimeout(() => showToast('¡Bienvenid@ a mi fiesta!', 'success'), 1500);
-
-  // Mostrar sección solo para la dueña
-  const urlParams = new URLSearchParams(window.location.search);
-  const esDuena = urlParams.get('owner') === 'mia2025';
-  if (esDuena) {
-    document.getElementById('seccion-owner').style.display = 'block';
-  }
 });
 
-// ===== MÚSICA (corregido y seguro) =====
-const musicBtn = document.getElementById('musicToggle');  // ← ¡ESTA LÍNEA FALTABA!
-
+// ===== MÚSICA CON AUTOPLAY INTELIGENTE =====
 function initMusic() {
-  if (!audio || !musicBtn || !musicIcon) {
-    console.warn('Elementos de música no encontrados');
-    return;
-  }
-
   audio.volume = 0.3;
-
-  // Intentamos autoplay
   const playPromise = audio.play();
   if (playPromise !== undefined) {
     playPromise.then(() => {
       musicIcon.className = 'fas fa-pause';
       musicBtn.classList.add('playing');
-      if (musicInfo) musicInfo.style.opacity = '1';
+      musicInfo.style.opacity = '1';
       isMusicPlaying = true;
     }).catch(() => {
-      showToast('🔊 Tocá el botón para activar la música', 'info');
+      showToast('🔊 Toca el botón para activar la música', 'info');
       musicBtn.style.animation = 'musicPulse 1.5s infinite';
     });
   }
 }
 
 function toggleMusic() {
-  if (!musicBtn || !audio || !musicIcon) return;
-
   musicBtn.style.animation = 'none';
-
   if (isMusicPlaying) {
     audio.pause();
     musicIcon.className = 'fas fa-play';
     musicBtn.classList.remove('playing');
-    if (musicInfo) musicInfo.style.opacity = '0.7';
+    musicInfo.style.opacity = '0.7';
     isMusicPlaying = false;
     showToast('🔇 Música pausada');
   } else {
     audio.play().then(() => {
       musicIcon.className = 'fas fa-pause';
       musicBtn.classList.add('playing');
-      if (musicInfo) musicInfo.style.opacity = '1';
+      musicInfo.style.opacity = '1';
       isMusicPlaying = true;
       showToast('🎵 ¡A bailar! ✨', 'success');
     }).catch(() => {
@@ -1232,14 +1206,20 @@ function toggleMusic() {
   }
 }
 
-// Desbloqueo en primer toque (para móviles)
-document.body.addEventListener('touchstart', () => {
-  if (!isMusicPlaying && audio) {
-    audio.play().catch(() => {});
+// ===== PRIMER TOQUE EN PANTALLA =====
+document.body.addEventListener('touchstart', function iniciarMusica() {
+  if (!isMusicPlaying) {
+    audio.play().then(() => {
+      musicIcon.className = 'fas fa-pause';
+      musicBtn.classList.add('playing');
+      musicInfo.style.opacity = '1';
+      isMusicPlaying = true;
+      musicBtn.style.animation = 'none';
+    }).catch(() => {});
   }
 }, { once: true });
 
-// ==== COUNTDOWN =====
+// ===== COUNTDOWN =====
 function initCountdown() {
   updateCountdown();
   setInterval(updateCountdown, 1000);
@@ -1390,7 +1370,7 @@ function closeLightbox(event) {
   }
 }
 
-// Funciones de compartir (mantenerlas)
+// ===== SHARE FUNCTIONS =====
 function compartirWhatsApp() {
   const mensaje = "✨ ¡Estás invitad@ a mis 15 años! ✨\nMía te invita a celebrar\n📅 15/11/2025 - 20:00hs\n📍 Salón Champagne Garden\nMirá la invitación: " + window.location.href;
   window.open(`https://wa.me/?text=${encodeURIComponent(mensaje)}`, '_blank');
@@ -1406,6 +1386,7 @@ function compartirInstagram() {
 function copiarLink() {
   navigator.clipboard.writeText(window.location.href).then(() => {
     showToast('🔗 Link copiado al portapapeles', 'success');
+    if (navigator.vibrate) navigator.vibrate([50, 100, 50]);
   });
 }
 
@@ -1426,7 +1407,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-console.log('✨ Invitación actualizada - Modo Dueña: ' + (document.getElementById('seccion-owner').style.display === 'block' ? 'ACTIVADO' : 'oculto'));
+console.log('✨🎀 Invitación 15 Enterprise - ¡Que brilles, Mía! 🎀✨');
 </script>
 </body>
 </html>
